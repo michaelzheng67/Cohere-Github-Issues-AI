@@ -1,0 +1,14 @@
+{
+    "name": "Github Issues AI",
+    "version": "1.0.0",
+    "description": "This is an extension to hlep you create Github issues automatically from your plain text",
+    "manifest_version": 3,
+    "author": "Michael Zheng",
+    "action" : {
+        "default_popup": "index.html",
+        "default_icon": "icon.png",
+        "default_title": "Github Issues AI",
+        "default_width": 400,
+        "default_height": 500
+    }
+}

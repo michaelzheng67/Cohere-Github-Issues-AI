@@ -3,4 +3,13 @@ body {
     height: 500px;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    max-width: calc(100% - 40px); /* Assuming you want 20px margin on each side */
+    min-height: 110vh;
+    overflow-y: scroll; 
+    margin: 0 auto;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column; 
 }

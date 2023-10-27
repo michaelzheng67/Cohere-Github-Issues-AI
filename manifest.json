@@ -1,14 +1,33 @@
 {
     "name": "Github Issues AI",
     "version": "1.0.0",
-    "description": "This is an extension to hlep you create Github issues automatically from your plain text",
+    "description": "This is an extension to help you create Github issues automatically from your plain text",
     "manifest_version": 3,
     "author": "Michael Zheng",
-    "action" : {
+    "action": {
         "default_popup": "index.html",
         "default_icon": "icon.png",
         "default_title": "Github Issues AI",
         "default_width": 400,
         "default_height": 500
+    },
+    "permissions": [
+        "identity",
+        "https://github.com/"
+    ],
+    "host_permissions": [
+        "https://github.com/"
+    ],
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self';"
+    },
+    "oauth2": {
+        "client_id": "792645551360-akijriedtk60h6v66oek6a9tmkli05lk.apps.googleusercontent.com",
+        "scopes": [
+            "openid",
+            "email",
+            "https://www.googleapis.com/auth/userinfo.email"
+        ],
+        "redirect_uris": ["https://mgmbafiopljbjfhpleekdffnlonejdma.chromiumapp.org/"]
     }
 }

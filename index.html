@@ -7,17 +7,34 @@
     <title>Github Issues AI</title>
 </head>
 <body>
-    <di id="header">
-        <h2>Write down what still needs to be done in your repo and I'll create the right issue tickets for you!</h2>
+    <script>
+        function fetchData() {
+            fetch('/data')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById('output').innerText = JSON.stringify(data);
+                });
+        }
+    </script>
+
+    <div id="loginScreen" style="margin-top: 10%;">
+        <h1 style="font-weight: bold;">Github Issues AI</h1>
+        <h2 style="font-weight: 400;" id="initialText">Tell us what repo you're working on and what still needs to be done, and we'll create issues for you!</h2>
+        <button id="githubLogin">Login with GitHub</button>
     </div>
 
-
-    <button id="githubLogin">Login with GitHub</button>
-    <select id="reposList" style="display: none;"></select>
+    <div id="postLoginScreen" style="display: none; margin-top: 10%;">
+        <h2>What needs to get done?</h2>
+        <input type="text" id="issueInput" placeholder="Enter work here">
+        <select id="reposList"></select>
+        <button id="createIssues" onclick="fetchData()">Create Issue(s)</button>
+    </div>
 
 
     <script src="config.js"></script>
     <script src="script.js"></script>
+    
 
 
 </body>

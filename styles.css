@@ -13,3 +13,51 @@ body {
     align-items: center;
     flex-direction: column; 
 }
+
+#initialText {
+    margin-bottom: 20%;
+}
+
+#githubLogin, #createIssues {
+    width: 100%;
+    /* height: 100%; */
+    border-radius: 5px;
+    border: none;         /* To remove any default borders */
+    margin: 0;            /* To remove any default margins */
+    padding: 10px;           /* Depending on the browser, there might be default padding */
+    background-color: #00008B; /* Or any other color you prefer */
+    color: white;        /* Text color */
+    font-size: 1.5rem;   /* Adjust text size as required */
+}
+
+#reposList {
+    width: 100%;
+    /* height: 100%; */
+    border-radius: 5px;
+    border: none;         /* To remove any default borders */
+    margin-bottom: 5%;            /* To remove any default margins */
+    padding: 10px;           /* Depending on the browser, there might be default padding */
+    background-color: darkgray; /* Or any other color you prefer */
+    color: white;        /* Text color */
+    font-size: 1.5rem;   /* Adjust text size as required */
+}
+
+#githubLogin:active {
+    background-color: darkgrey;
+}
+
+#issueInput {
+    box-sizing: border-box;
+    width: 100%;
+    height: 200px;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    background-color: lightgrey;
+    padding: 8px;            /* Optional: add some inner padding for better appearance */
+    border: 1px solid #ccc; /* Optional: a subtle border, adjust as needed */
+    font-size: 1rem;        /* Optional: adjust font size as needed */
+    border-radius: 5px;
+}
+
+
+

@@ -14,6 +14,11 @@ document.getElementById('githubLogin').addEventListener('click', function() {
         // Exchange the code for an access token
         exchangeCodeForToken(code, clientID, clientSecret, redirectURI)
         .then(token => {
+
+            // Successful login, switch the screen
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('postLoginScreen').style.display = 'block';
+
             fetchReposWithToken(token);
         })
         .catch(error => {

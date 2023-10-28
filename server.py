@@ -1,5 +1,6 @@
 from http.server import SimpleHTTPRequestHandler, HTTPServer
 import json
+import cohere
 
 class CustomHandler(SimpleHTTPRequestHandler):
 

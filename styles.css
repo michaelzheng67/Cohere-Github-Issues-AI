@@ -42,6 +42,20 @@ body {
     font-size: 1.5rem;   /* Adjust text size as required */
 }
 
+#cohereAPI {
+    box-sizing: border-box;
+    width: 100%;
+    /* height: 100%; */
+    border-radius: 5px;
+    padding: 8px; 
+    border: none;         /* To remove any default borders */
+    margin-bottom: 5%;            /* To remove any default margins */
+    padding: 10px;           /* Depending on the browser, there might be default padding */
+    background-color: darkgray; /* Or any other color you prefer */
+    color: white;        /* Text color */
+    font-size: 1.5rem;   /* Adjust text size as required */
+}
+
 #githubLogin:active {
     background-color: darkgrey;
 }

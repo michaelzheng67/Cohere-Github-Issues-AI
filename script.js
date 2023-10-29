@@ -75,3 +75,22 @@ function fetchReposWithToken(token) {
         console.error('Error fetching repos:', error);
     });
 }
+
+document.getElementById('fetchButton').addEventListener('click', fetchData);
+
+function fetchData() {
+    // Get the value from the input field
+    const text = document.getElementById('issueInput').value;
+    const cohere_api_key = document.getElementById('cohereAPI').value;
+    const repo = document.getElementById('reposList').value;
+
+    // Construct the URL with the query parameter
+    const url = '/data?cohere_api_key=' + encodeURIComponent(cohere_api_key) + '&text=' + encodeURIComponent(text) + '&repo=' + encodeURIComponent(repo);
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('output').innerText = JSON.stringify(data.summary);
+        });
+}

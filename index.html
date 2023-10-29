@@ -7,16 +7,6 @@
     <title>Github Issues AI</title>
 </head>
 <body>
-    <script>
-        function fetchData() {
-            fetch('/data')
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                    document.getElementById('output').innerText = JSON.stringify(data);
-                });
-        }
-    </script>
 
     <div id="loginScreen" style="margin-top: 10%;">
         <h1 style="font-weight: bold;">Github Issues AI</h1>
@@ -29,7 +19,8 @@
         <input type="text" id="issueInput" placeholder="Enter work here">
         <input type="text" id="cohereAPI" placeholder="Cohere API Key">
         <select id="reposList"></select>
-        <button id="createIssues" onclick="fetchData()">Create Issue(s)</button>
+        <button id="fetchButton">Create Issue(s)</button>
+        <div id="output"></div>
     </div>
 
 

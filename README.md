@@ -25,6 +25,7 @@ Mockup:
 Architecture:
 - The frontend of the chrome extension is pretty basic, just a webpage basically that has functionality through js functions
 - have a button that calls a python endpoint that hits Cohere's API and returns bullet points that are then used to create issues on the client side that is authenticated to Github
+- The Cohere API is also fed information about the codebase itself. This way, we can include more description into the issues that will allow us to give context to the issues
 
 Setup instructions:
 - run "python server.py" to get backend endpoint running

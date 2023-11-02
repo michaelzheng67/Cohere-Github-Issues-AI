@@ -5,28 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>Github Issues AI</title>
+    
 </head>
 <body>
 
     <div id="loginScreen" style="margin-top: 10%;">
         <h1 style="font-weight: bold;">Github Issues AI</h1>
         <h2 style="font-weight: 400;" id="initialText">Tell us what repo you're working on and what still needs to be done, and we'll create issues for you!</h2>
-        <button id="githubLogin">Login with GitHub</button>
+        <button id="login">Login with GitHub</button>
     </div>
 
     <div id="postLoginScreen" style="display: none; margin-top: 10%;">
         <h2>What needs to get done?</h2>
-        <input type="text" id="issueInput" placeholder="Enter work here">
-        <input type="text" id="cohereAPI" placeholder="Cohere API Key">
+        <textarea type="text" id="issueInput" placeholder="Enter work here"></textarea>
+        <h6 id="charCount">250 more characters needed</h6>
+        <!-- <input type="text" id="cohereAPI" placeholder="Cohere API Key"> -->
         <select id="reposList"></select>
         <button id="fetchButton">Create Issue(s)</button>
-        <div id="output"></div>
+        <div id="createdIssuesContainer">
+            <h2>Created Issues:</h2>
+            <ul id="createdIssuesList"></ul>
+        </div>
     </div>
 
 
+    
     <script src="config.js"></script>
     <script src="script.js"></script>
-    
 
 
 </body>

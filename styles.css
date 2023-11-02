@@ -18,7 +18,7 @@ body {
     margin-bottom: 20%;
 }
 
-#githubLogin, #fetchButton {
+#login, #fetchButton {
     width: 100%;
     /* height: 100%; */
     border-radius: 5px;
@@ -56,7 +56,7 @@ body {
     font-size: 1.5rem;   /* Adjust text size as required */
 }
 
-#githubLogin:active, #fetchButton:active {
+#login:active, #fetchButton:active {
     background-color: darkgrey;
 }
 
@@ -65,7 +65,7 @@ body {
     width: 100%;
     height: 200px;
     margin-top: 5%;
-    margin-bottom: 10%;
+    /* margin-bottom: 5%; */
     background-color: lightgrey;
     padding: 8px;            /* Optional: add some inner padding for better appearance */
     border: 1px solid #ccc; /* Optional: a subtle border, adjust as needed */

@@ -12,13 +12,11 @@
         "default_height": 500
     },
     "permissions": [
-        "identity",
-        "https://github.com/",
-        "http://localhost:8000/"
+        "identity"
     ],
     "host_permissions": [
-        "https://github.com/",
-        "http://localhost:8000/"
+        "https://github.com/*",
+        "http://localhost/*"
     ],
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self';"

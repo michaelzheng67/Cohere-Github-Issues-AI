@@ -21,7 +21,7 @@ class CustomHandler(SimpleHTTPRequestHandler):
             co = cohere.Client(cohere_api_key)
             response = co.summarize(
                 text=text,
-                model='command-lite',
+                model='command',
                 length='short',
                 format='bullets'
             )
@@ -29,10 +29,11 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
             self.send_response(200)
             self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
 
             # Use the parameter in the response data
-            self.send_header('Access-Control-Allow-Origin', '*')
+            
 
             data = {"key": "value", "summary": summary}
             self.wfile.write(json.dumps(data).encode())

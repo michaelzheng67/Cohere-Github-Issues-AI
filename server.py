@@ -37,6 +37,38 @@ class CustomHandler(SimpleHTTPRequestHandler):
 
             data = {"key": "value", "summary": summary}
             self.wfile.write(json.dumps(data).encode())
+
+        elif parsed_path.path == '/suggestion':
+            # Parse the query parameters from the URL
+            params = parse_qs(parsed_path.query)
+
+            # For example, to get the value of a parameter named 'name':
+            # (Use a default value if the parameter is not present)
+            cohere_api_key = params.get('cohere_api_key', [''])[0]
+            text = params.get('text', [''])[0]
+
+            co = cohere.Client(cohere_api_key)
+            response = co.generate(  
+                model='command-nightly',  
+                prompt = text + ". Can you tell me how to do this?",  
+                max_tokens=200, # This parameter is optional. 
+                temperature=0.750)
+
+            response = response.generations[0].text
+            suggestion = response
+
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+
+            # Use the parameter in the response data
+            
+
+            data = {"key": "value", "suggestion": suggestion}
+            self.wfile.write(json.dumps(data).encode())
+
+
         else:
             super().do_GET()
 

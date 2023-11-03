@@ -129,20 +129,37 @@ function fetchData() {
                 const trimmedPoint = point.trim();
                 return trimmedPoint.length > 2 ? trimmedPoint.substring(2) : trimmedPoint;
             });
+            
+            point_objects = [];
+
+            for (let i = 0; i < points.length; i++) {
+                curr_issue = points[i];
+                
+                // create suggestion based on issue name
+                const suggestion_url = 'http://localhost:8000/suggestion?cohere_api_key=' + encodeURIComponent(cohere_api_key) + '&text=' + encodeURIComponent(curr_issue);
+                fetch(suggestion_url)
+                    .then(response => response.json())
+                    .then(data => {
+                        object = {title : curr_issue, suggestion : data.suggestion};
+                        point_objects.push(object);
+                    });
+
+            }
             // create issues in repo
-            createIssuesWithToken(GITHUB_TOKEN, repo, points);
+            createIssuesWithToken(GITHUB_TOKEN, repo, point_objects);
         });
 }
 
 // create issues on Github
-function createIssuesWithToken(token, repoName, issueTitles) {
+function createIssuesWithToken(token, repoName, issues) {
     // Get the authenticated user's repos URL directly
     const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${repoName}/issues`;
     const createdIssuesList = document.getElementById('createdIssuesList'); // Get the list element
 
-    issueTitles.forEach(title => {
+    issues.forEach(issue => {
         const issueData = {
-            title: title
+            title: issue.title,
+            body: issue.description // Here we include the issue description
         };
 
         fetch(url, {
@@ -155,16 +172,16 @@ function createIssuesWithToken(token, repoName, issueTitles) {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Failed to create issue with title: ${title}`);
+                throw new Error(`Failed to create issue with title: ${issue.title}`);
             }
             return response.json();
         })
-        .then(issue => {
-            console.log(`Successfully created issue #${issue.number}: ${title}`);
+        .then(issueResponse => {
+            console.log(`Successfully created issue #${issueResponse.number}: ${issue.title}`);
 
             // Create a new list item for the issue and append it to the list
             const li = document.createElement('li');
-            li.innerHTML = `<h3><a href="${issue.html_url}" target="_blank">Issue #${issue.number}: ${title}</a></h3>`;
+            li.innerHTML = `<h3><a href="${issueResponse.html_url}" target="_blank">Issue #${issueResponse.number}: ${issue.title}</a></h3>`;
             createdIssuesList.appendChild(li);
         })
         .catch(error => {

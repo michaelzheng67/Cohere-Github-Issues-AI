@@ -22,6 +22,10 @@ Each bullet point summary is then passed to a function that creates an issue in 
 Mockup:
 ![Screenshot 2023-10-27 at 8 09 22 PM](https://github.com/michaelzheng67/Cohere-Github-Issues-AI/assets/82613778/22343b88-e400-4e02-94e4-464270de6d88)
 
+Demo:
+https://github.com/michaelzheng67/Cohere-Github-Issues-AI/assets/82613778/dc3cf739-1650-4035-8dd2-4b245de78243
+
+
 Architecture:
 - The frontend of the chrome extension is pretty basic, just a webpage basically that has functionality through js functions
 - have a button that calls a python endpoint that hits Cohere's API and returns bullet points that are then used to create issues on the client side that is authenticated to Github

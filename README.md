@@ -28,4 +28,12 @@ Architecture:
 - The Cohere API is also fed information about the codebase itself. This way, we can include more description into the issues that will allow us to give context to the issues
 
 Setup instructions:
+- create an oauth app on github to authorize the app to use your repos: https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app
+- set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET based on your oauth app
+- create a cohere developer account: https://cohere.com
+- set COHERE_API_KEY based on cohere dev account keys
+- run "source venv/bin/activate" to activate virtual python environment with deps installed
 - run "python server.py" to get backend endpoint running
+- go to chrome and go to "manage extensions"
+- select "load unpacked" and choose this project
+- you should be able to run the extension now!

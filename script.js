@@ -111,42 +111,39 @@ document.getElementById('fetchButton').addEventListener('click', fetchData);
 
 // fetch data from Cohere API
 function fetchData() {
-    // Get the value from the input field
     const text = document.getElementById('issueInput').value;
-    //const cohere_api_key = document.getElementById('cohereAPI').value;
-    const cohere_api_key = COHERE_API_KEY;
+    const cohere_api_key = COHERE_API_KEY; // Make sure this is securely managed
     const repo = document.getElementById('reposList').value;
 
-    // Construct the URL with the query parameter
-    const url = 'http://localhost:8000/data?cohere_api_key=' + encodeURIComponent(cohere_api_key) + '&text=' + encodeURIComponent(text) + '&repo=' + encodeURIComponent(repo);
+    const url = `http://localhost:8000/data?cohere_api_key=${encodeURIComponent(cohere_api_key)}&text=${encodeURIComponent(text)}&repo=${encodeURIComponent(repo)}`;
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data);
             const output = data.summary;
-            const points = output.split("\n").map(point => {
-                const trimmedPoint = point.trim();
-                return trimmedPoint.length > 2 ? trimmedPoint.substring(2) : trimmedPoint;
-            });
-            
-            point_objects = [];
+            const points = output.split("\n").map(point => point.trim().substring(2)).filter(point => point.length > 2);
 
-            for (let i = 0; i < points.length; i++) {
-                curr_issue = points[i];
-                
-                // create suggestion based on issue name
-                const suggestion_url = 'http://localhost:8000/suggestion?cohere_api_key=' + encodeURIComponent(cohere_api_key) + '&text=' + encodeURIComponent(curr_issue);
-                fetch(suggestion_url)
+            const suggestionPromises = points.map(curr_issue => {
+                const suggestion_url = `http://localhost:8000/suggestion?cohere_api_key=${encodeURIComponent(cohere_api_key)}&text=${encodeURIComponent(curr_issue)}`;
+                return fetch(suggestion_url)
                     .then(response => response.json())
                     .then(data => {
-                        object = {title : curr_issue, suggestion : data.suggestion};
-                        point_objects.push(object);
+                        return { title: curr_issue, suggestion: data.suggestion };
                     });
+            });
 
-            }
-            // create issues in repo
-            createIssuesWithToken(GITHUB_TOKEN, repo, point_objects);
+            // Resolve all promises from fetching suggestions
+            Promise.all(suggestionPromises)
+                .then(point_objects => {
+                    // Create issues in repo after all suggestions have been fetched
+                    createIssuesWithToken(GITHUB_TOKEN, repo, point_objects);
+                })
+                .catch(error => {
+                    console.error('Error fetching suggestions:', error);
+                });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
         });
 }
 
@@ -159,7 +156,7 @@ function createIssuesWithToken(token, repoName, issues) {
     issues.forEach(issue => {
         const issueData = {
             title: issue.title,
-            body: issue.description // Here we include the issue description
+            body: issue.suggestion 
         };
 
         fetch(url, {
@@ -172,7 +169,7 @@ function createIssuesWithToken(token, repoName, issues) {
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Failed to create issue with title: ${issue.title}`);
+                console.log(`Failed to create issue with title: ${issue.title}`);
             }
             return response.json();
         })

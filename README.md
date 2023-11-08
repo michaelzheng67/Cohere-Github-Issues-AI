@@ -1,6 +1,6 @@
 # Github Issues AI
 
-## Idea: A browser extension that allows you to specify a repository and write plain text about a problem that you want to solve. The extension will then automatically create github issues for you
+### A browser extension that automatically creates github issues with suggestions for the developer
 
 Tech stack: 
 - Cohere for "Classify" function and being able to identify what the user wants
